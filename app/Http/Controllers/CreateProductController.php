@@ -18,10 +18,10 @@ class CreateProductController extends Controller
 
     public function index()
     {
-        return view('dashboard');
+        return view('createProduct');
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $this->productService->create(
             $request->input('name'),
@@ -29,6 +29,7 @@ class CreateProductController extends Controller
             new Money($request->input('price') * 100, new Currency('ARS'))
         );
 
+        return redirect()->route('dashboard');
     }
 
 

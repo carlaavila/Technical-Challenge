@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CreateProductController;
+use App\Http\Controllers\Product\ListProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,8 +13,9 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(
     function () {
-        Route::get('/dashboard', [CreateProductController::class, 'index'])->name('dashboard');
-        Route::post('/dashboard', [CreateProductController::class, 'create'])->name('createProduct');
+        Route::get('/dashboard', [ListProductController::class, 'index'])->name('dashboard');
+        Route::post('/create-product', [CreateProductController::class, 'store'])->name('createProduct');
+
 
     }
 );

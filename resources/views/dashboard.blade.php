@@ -10,12 +10,30 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
+
                     <div class="text-gray-900 bg-gray-200">
                         <div class="p-4 flex">
                             <h1 class="text-3xl">
                                 Productos
                             </h1>
                         </div>
+
+                        <div>
+                            <ul>
+                                <li>
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger" data-dismiss="alert">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+
                         <div>
                             <button onclick="openModal('main-modal')" class="w-full py-3 mt-10 bg-gray-800 rounded-sm
                              font-medium text-white uppercase focus:outline-none hover:bg-gray-700 hover:shadow-none" >Agregar Productos</button>
@@ -132,7 +150,7 @@
                             <input type="text" id="description" autocomplete="off" name="description" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" >
                         </div>
                         <div class="">
-                            <label>Precio en $ (pesos)</label>
+                            <label class="text-md text-gray-600">Precio en $ (pesos)</label>
                         </div>
                         <div class="">
                             <input id="price" type="number" name="price" min="1.00" step="0.01" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" >

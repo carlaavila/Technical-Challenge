@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Money\Currency;
 use Money\Money;
+use phpDocumentor\Reflection\Types\Integer;
 
 class Product extends Model
 {
@@ -44,5 +45,15 @@ class Product extends Model
     public function setPrice(Money $price): void
     {
         $this->price = $price->getAmount();
+    }
+
+    public function getQuantity(): Integer
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): void
+    {
+        $this->quantity = $quantity;
     }
 }

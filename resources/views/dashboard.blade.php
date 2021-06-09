@@ -45,6 +45,7 @@
                                     <th class="text-left p-3 px-5">Nombre</th>
                                     <th class="text-left p-3 px-5">Descripción</th>
                                     <th class="text-left p-3 px-5">Precio</th>
+                                    <th class="text-left p-3 px-5">Cantidad</th>
                                     <th></th>
                                 </tr>
                                 @foreach ($products as $product)
@@ -52,7 +53,8 @@
 
                                         <td class="p-3 px-5">{{ $product['name'] }}</td>
                                         <td class="p-3 px-5">{{ $product['description'] }}</td>
-                                        <td class="p-3 px-5">{{ $product['price']/100 }}</td>
+                                        <td class="p-3 px-5">${{ $product['price']/100 }}</td>
+                                        <td class="p-3 px-5">{{ $product['quantity'] }}</td>
                                         <td class="p-3 px-5 flex justify-end"><button type="button" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Comprar</button></td>
                                     @endforeach
                                 </tr>
@@ -154,6 +156,13 @@
                         </div>
                         <div class="">
                             <input id="price" type="number" name="price" min="1.00" step="0.01" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" >
+
+                        </div>
+                        <div class="">
+                            <label class="text-md text-gray-600">Cantidad</label>
+                        </div>
+                        <div class="">
+                            <input id="quantity" type="number" name="quantity" min="1" step="1" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" >
 
                         </div>
                     </div>

@@ -33,6 +33,7 @@ class CreateProductController extends Controller
             'name' => 'required|string',
             'description' => 'string',
             'price' => 'required|min:0',
+            'quantity' => 'required|min:0',
         ]);
         if ($validator->fails()) {
             return redirect('dashboard')
@@ -43,7 +44,8 @@ class CreateProductController extends Controller
         $this->productService->create(
             $request->input('name'),
             $request->input('description'),
-            new Money($request->input('price') * 100, new Currency('ARS'))
+            new Money($request->input('price') * 100, new Currency('ARS')),
+            $request->input('quantity'),
         );
 
         return redirect()->route('dashboard');

@@ -156,6 +156,7 @@ return [
         'password_confirmation' => 'confirmación de la contraseña',
         'phone'                 => 'teléfono',
         'price'                 => 'precio',
+        'quantity'                 => 'cantidad',
         'role'                  => 'rol',
         'second'                => 'segundo',
         'sex'                   => 'sexo',

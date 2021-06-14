@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Product;
 
+use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Service\Product\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +22,11 @@ class CreateProductController extends Controller
 
     public function index()
     {
-        return view('createProduct');
+        $products = Product::all();
+
+        return view('/createProduct')->with(
+            'products', $products
+        );
     }
 
     /**
@@ -33,10 +39,9 @@ class CreateProductController extends Controller
             'name' => 'required|string',
             'description' => 'string',
             'price' => 'required|min:0',
-            'quantity' => 'required|min:0',
         ]);
         if ($validator->fails()) {
-            return redirect('dashboard')
+            return redirect('createProduct')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -44,11 +49,10 @@ class CreateProductController extends Controller
         $this->productService->create(
             $request->input('name'),
             $request->input('description'),
-            new Money($request->input('price') * 100, new Currency('ARS')),
-            $request->input('quantity'),
+            new Money($request->input('price') * 100, new Currency('ARS'))
         );
 
-        return redirect()->route('dashboard');
+        return redirect()->route('createProduct');
     }
 
 

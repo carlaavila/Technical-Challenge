@@ -25,4 +25,12 @@ class ProductRepository
     public function listAllProducts() {
         return Product::query()->get();
     }
+
+    public function findProductById(int $id) : ?Product
+    {
+        return Product::query()
+            ->where('id', '=', $id)
+            ->get()
+            ->first();
+    }
 }

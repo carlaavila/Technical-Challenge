@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Money\Currency;
 use Money\Money;
-use phpDocumentor\Reflection\Types\Integer;
+
 
 class Product extends Model
 {
@@ -47,13 +48,10 @@ class Product extends Model
         $this->price = $price->getAmount();
     }
 
-    public function getQuantity(): Integer
+    public function order(): HasOne
     {
-        return $this->quantity;
+        return $this->hasOne(Order::class);
+
     }
 
-    public function setQuantity(int $quantity): void
-    {
-        $this->quantity = $quantity;
-    }
 }

@@ -3,7 +3,8 @@
 namespace App\Service\MercadoPago;
 
 use App\Models\Product;
-use http\Env\Request;
+use App\Service\Order\OrderService;
+use Illuminate\Http\Request;
 use MercadoPago\Item;
 use MercadoPago\Preference;
 use MercadoPago\SDK;
@@ -15,22 +16,24 @@ SDK::setAccessToken('TEST-2018341020639303-060912-516ffa99130e677407f1a1b118420b
 
 class MercadoPagoService
 {
+    private $orderService;
 
-    public function createPreference(Request $request){
 
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
+    public function createPreference(Product $product, int $quantity)
+    {
         $preference = new Preference();
 
         $item = new Item();
 
-        $id = $request->route('id');
-
-        $product = Product::where([
-            ['id', '=', $id],
-        ])->firstOrFail();
 
         $item->title = $product->getName();
         $item->description = $product->getDescription();
-        $item->quantity = $product->getQuantity();
+        $item->quantity = $quantity;
         $item->unit_price = floatval($product->getPrice()->getAmount()/100);
 
         $preference->items = array($item);
@@ -44,7 +47,19 @@ class MercadoPagoService
 
         $preference->save();
 
-        return $preference;
+        $amount = $item->unit_price * $quantity;
+
+        $response = array(
+            'id' => $preference->id,
+        );
+
+        $order = $this->orderService->createOrder($amount,$quantity,$product->getId(),$preference->id,1);
+
+        return view('/dashboard')->with([
+                'preference', $preference,
+                'order',$order
+        ]);
+
 
     }
 

@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('quantity');
             $table->string('order_status');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('preference_id');
+            $table->string('preference_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

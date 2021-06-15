@@ -18,7 +18,7 @@ class OrderService
         $this->orderRepository = $orderRepository;
     }
 
-    public function create(float $amount, int $quantity, int $product_id, int $preference_id, int $user_id)
+    public function createOrder(float $amount,int $quantity, int $product_id, string $preference_id, int $user_id)
     {
         $order = new Order();
 
@@ -33,6 +33,12 @@ class OrderService
         $order->setUserId($user_id);
 
         $this->orderRepository->save($order);
+
+        return view('/dashboard')->with(
+            'order', $order
+        );
+
+
     }
 
 }

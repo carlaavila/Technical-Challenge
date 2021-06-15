@@ -179,15 +179,6 @@
                         <div class="">
                             <input id="price" type="number" name="price" min="1.00" step="0.01" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" >
 
-                        </div>
-{{--                        <div class="">--}}
-{{--                            <label class="text-md text-gray-600">Cantidad</label>--}}
-{{--                        </div>--}}
-{{--                        <div class="">--}}
-{{--                            <input id="quantity" type="number" name="quantity" min="1" step="1" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" >--}}
-
-{{--                        </div>--}}
-                    </div>
                 </form>
             </div>
             <!--Footer-->

@@ -6,25 +6,35 @@ namespace App\Http\Controllers\Order;
 
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\User;
-use App\Repository\Order\OrderRepository;
-use App\Service\Order\OrderService;
+use App\Service\MercadoPago\MercadoPagoService;
 use App\Service\Product\ProductService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class CreateOrderController
 {
-    private $orderService;
-    private $productService;
-    private $orderRepository;
+    private $MercadoPagoService;
 
-    public function __construct(OrderService $orderService, ProductService $productService, OrderRepository $orderRepository)
+    public function __construct( ProductService $productService, MercadoPagoService $mercadoPagoService)
     {
-        $this->orderService = $orderService;
         $this->productService = $productService;
-        $this->orderRepository = $orderRepository;
+        $this->mercadoPagoService = $mercadoPagoService;
+    }
+
+    public function index(Request $request)
+    {
+        $id = $request->route('id');
+
+        $product = Product::where([
+            ['id', '=', $id],
+        ])->firstOrFail();
+
+        $order = Order::all();
+
+        return view('createOrder')
+            ->with('product',$product)
+            ->with('order', $order)  ;
+
+
     }
 
     public function store(Request $request)
@@ -36,31 +46,14 @@ class CreateOrderController
             ['id', '=', $id],
         ])->firstOrFail();
 
+        $quantity = $request->input('quantity');
 
-//        $validator = Validator::make($request->all(), [
-//            'code' => 'required|string',
-//            'amount' => 'string',
-//            'quantity' => 'required|min:0',
-//            'order_status' => 'required',
-//            'product_id' => 'required',
-//            'preference_id' => 'required',
-//            'user_id' => 'required',
-//        ]);
-//        if ($validator->fails()) {
-//            return redirect('dashboard')
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
+        $this->mercadoPagoService->createPreference($product, $quantity);
 
-        $product = $this->productService->findByIdOrFail($product->getId());
+        return redirect()
+            ->route('createOrder', ['id' => $id])
+            ->with('success', 'Orden de compra creada exitosamente');
 
-
-
-//        $order = $this->orderService->create();
-//        $this->orderRepository->save($order);
-
-
-        return redirect()->route('createProduct');
     }
 
 }

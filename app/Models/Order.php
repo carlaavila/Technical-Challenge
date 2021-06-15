@@ -81,7 +81,7 @@ class Order extends Model
         return $this->preference;
     }
 
-    public function setPreferenceId(int $preferenceId): void
+    public function setPreferenceId(string $preferenceId): void
     {
         $this->preference_id = $preferenceId;
     }

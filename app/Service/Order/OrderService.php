@@ -34,10 +34,6 @@ class OrderService
 
         $this->orderRepository->save($order);
 
-        return view('/dashboard')->with(
-            'order', $order
-        );
-
 
     }
 

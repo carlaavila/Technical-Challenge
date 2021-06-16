@@ -4,8 +4,8 @@ namespace App\Service\MercadoPago;
 
 use App\Models\Product;
 use App\Service\Order\OrderService;
-use Illuminate\Http\Request;
 use MercadoPago\Item;
+use MercadoPago\Payer;
 use MercadoPago\Preference;
 use MercadoPago\SDK;
 
@@ -24,12 +24,11 @@ class MercadoPagoService
         $this->orderService = $orderService;
     }
 
-    public function createPreference(Product $product, int $quantity)
+    public function createPreference(Product $product, $quantity)
     {
         $preference = new Preference();
 
         $item = new Item();
-
 
         $item->title = $product->getName();
         $item->description = $product->getDescription();
@@ -38,29 +37,23 @@ class MercadoPagoService
 
         $preference->items = array($item);
 
-//        $preference->back_urls = array(
-//            "success" => "http://localhost:8080/feedback",
-//            "failure" => "http://localhost:8080/feedback",
-//            "pending" => "http://localhost:8080/feedback"
-//        );
-//        $preference->auto_return = "approved";
+        $payer = new Payer();
+        $payer->name = "Carla";
+        $payer->email = "carlita-avila96@hotmail.com";
+
+        $preference->back_urls = array(
+            "success" => "http://localhost:8080/dashboard",
+            "failure" => "http://localhost:8080/failure",
+            "pending" => "http://localhost:8080/pending"
+        );
+        $preference->auto_return = "approved";
+
 
         $preference->save();
 
-        $amount = $item->unit_price * $quantity;
+        $amount = $item->unit_price * $item->quantity;
 
-        $response = array(
-            'id' => $preference->id,
-        );
-
-        $order = $this->orderService->createOrder($amount,$quantity,$product->getId(),$preference->id,1);
-
-        return view('/dashboard')->with([
-                'preference', $preference,
-                'order',$order
-        ]);
-
-
+        $this->orderService->createOrder($amount,$item->quantity,$product->getId(),$preference->id,1);
     }
 
 

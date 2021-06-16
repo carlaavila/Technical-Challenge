@@ -27,15 +27,6 @@ class ProductService
         $this->productRepository->save($product);
     }
 
-    public function findByIdOrFail(int $productId): Product
-    {
-
-        $product = $this->productRepository->findProductById($productId);
-        if (!isset($product) && empty($product)) {
-            throw new EntityNotFoundException(stringValue(),"Ocurrió un error o el producto seleccionado no existe.");
-        }
-        return $product;
-    }
 
 
 }

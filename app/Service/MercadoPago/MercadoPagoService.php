@@ -16,15 +16,8 @@ SDK::setAccessToken('TEST-2018341020639303-060912-516ffa99130e677407f1a1b118420b
 
 class MercadoPagoService
 {
-    private $orderService;
 
-
-    public function __construct(OrderService $orderService)
-    {
-        $this->orderService = $orderService;
-    }
-
-    public function createPreference(Product $product, $quantity)
+    public function createPreference(Product $product, $quantity): Preference
     {
         $preference = new Preference();
 
@@ -51,9 +44,7 @@ class MercadoPagoService
 
         $preference->save();
 
-        $amount = $item->unit_price * $item->quantity;
-
-        $this->orderService->createOrder($amount,$item->quantity,$product->getId(),$preference->id,1);
+        return $preference;
     }
 
 

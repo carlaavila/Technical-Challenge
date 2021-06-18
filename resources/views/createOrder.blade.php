@@ -16,7 +16,7 @@
             // Inicializa el checkout
             mp.checkout({
                 preference: {
-                    id:  {{$order['preference_id']}}
+                    {{--id:  {{$order ?? ''['preference_id']}}--}}
                 },
                 render: {
                     container: '.cho-container', // Indica dónde se mostrará el botón de pago
@@ -64,10 +64,12 @@
                                 </tr>
                                     <tr class="border-b hover:bg-orange-100 bg-gray-100">
                                         <td class="p-3 px-5">{{ $product['name'] }}</td>
-                                        <td class="p-3 px-5">{{ $product['description'] }}</td>
-                                        <td class="p-3 px-5">{{ $order['quantity'] }}</td>
+                                        <td class="p-3 px-5">{{ $product ['description'] }}</td>
+                                        <td class="p-3 px-5">{{ $order ['quantity'] }}</td>
                                         <td class="p-3 px-5">${{ $order['amount'] }}</td>
-                                        <td class="p-3 px-5 flex justify-end"><button class=" cho-container mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Pagar</button></td>
+                                        <td class="p-3 px-5 flex justify-end"><button class=" cho-container
+                                        mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded
+                                         focus:outline-none focus:shadow-outline">Pagar</button></td>
 
                                     </tr>
                                 </tbody>

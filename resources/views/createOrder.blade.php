@@ -13,7 +13,7 @@
         })
         const checkout = mp.checkout({
             preference: {
-                id:'{{json_encode($order['preference_id'])}}'
+                id: {!!json_encode($order['preference_id']) !!},
             }
         });
         checkout.render({

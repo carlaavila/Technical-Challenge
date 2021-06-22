@@ -4,7 +4,6 @@ namespace App\Service\Product;
 
 use App\Models\Product;
 use App\Repository\Product\ProductRepository;
-use Illuminate\Contracts\Queue\EntityNotFoundException;
 use Money\Money;
 
 class ProductService

@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Service\Product\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use Money\Currency;
 use Money\Money;
 
@@ -29,9 +28,7 @@ class CreateProductController extends Controller
         );
     }
 
-    /**
-     * @throws ValidationException
-     */
+
     public function store(Request $request)
     {
 

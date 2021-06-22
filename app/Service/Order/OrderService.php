@@ -18,11 +18,9 @@ class OrderService
         $this->orderRepository = $orderRepository;
     }
 
-    public function createOrder(float $amount,int $quantity, int $product_id, string $preference_id, int $user_id): Order
+    public function createOrder(string $code,float $amount,int $quantity, int $product_id, string $preference_id, int $user_id): Order
     {
         $order = new Order();
-
-        $code = Str::random(15);
 
         $order->setCode($code);
         $order->setAmount($amount);

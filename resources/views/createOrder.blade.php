@@ -5,23 +5,6 @@
         </h2>
     </x-slot>
 
-    <div class="cho-container"></div>
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-    <script>
-        const mp = new MercadoPago('TEST-b86adc2b-5e8a-4f57-8fa9-93157296c74b', {
-            locale: 'es-AR'
-        })
-        const checkout = mp.checkout({
-            preference: {
-                id: {!!json_encode($order['preference_id']) !!},
-            }
-        });
-        checkout.render({
-            container: '.cho-container',
-            label: 'Pagar'
-        });
-    </script>
-
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -64,6 +47,7 @@
                                         <td class="p-3 px-5">{{ $order ['quantity'] }}</td>
                                         <td class="p-3 px-5">${{ $order['amount'] }}</td>
                                         <td class="p-3 px-5 flex justify-end">
+                                            <div class="cho-container"></div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -74,6 +58,22 @@
             </div>
         </div>
     </div>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script>
+        const mp = new MercadoPago('TEST-b86adc2b-5e8a-4f57-8fa9-93157296c74b', {
+            locale: 'es-AR'
+        })
+        const checkout = mp.checkout({
+            preference: {
+                id: {!!json_encode($order['preference_id']) !!},
+            }
+        });
+        checkout.render({
+            container: '.cho-container',
+            label: 'Pagar',
+        });
+    </script>
 </x-app-layout>
 
 

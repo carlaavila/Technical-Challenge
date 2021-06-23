@@ -4,28 +4,7 @@
             {{ __('Añadir Productos') }}
         </h2>
     </x-slot>
-    <x-slot name="scripts">        /
-        <script src="https://sdk.mercadopago.com/js/v2"></script>
 
-        <script>
-            // Agrega credenciales de SDK
-            const mp = new MercadoPago('TEST-b86adc2b-5e8a-4f57-8fa9-93157296c74b', {
-                locale: 'es-AR'
-            });
-
-            // Inicializa el checkout
-            mp.checkout({
-                preference: {
-                    id: '212266020-ca897c4c-d2d3-488a-b917-8b99bcf63ca2'
-                },
-                render: {
-                    container: '.checkout-button', // Indica dónde se mostrará el botón de pago
-                    label: 'Comprar', // Cambia el texto del botón de pago (opcional)
-                }
-            });
-        </script>
-
-    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -67,7 +46,6 @@
                                     <th class="text-left p-3 px-5">Nombre</th>
                                     <th class="text-left p-3 px-5">Descripción</th>
                                     <th class="text-left p-3 px-5">Precio</th>
-{{--                                    <th class="text-left p-3 px-5">Cantidad</th>--}}
                                 </tr>
                                 @foreach ($products as $product)
                                     <tr class="border-b hover:bg-orange-100 bg-gray-100">
@@ -75,7 +53,6 @@
                                         <td class="p-3 px-5">{{ $product['name'] }}</td>
                                         <td class="p-3 px-5">{{ $product['description'] }}</td>
                                         <td class="p-3 px-5">${{ $product['price']/100 }}</td>
-{{--                                        <td class="p-3 px-5">{{ $product['quantity'] }}</td>--}}
                                         @endforeach
                                     </tr>
 

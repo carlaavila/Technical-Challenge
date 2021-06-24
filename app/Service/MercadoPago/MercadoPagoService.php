@@ -6,12 +6,13 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 use MercadoPago\Item;
 use MercadoPago\Payer;
+use MercadoPago\Payment;
 use MercadoPago\Preference;
 use MercadoPago\SDK;
 
 require '../../../vendor/autoload.php';
 
-SDK::setAccessToken('TEST-2018341020639303-060912-516ffa99130e677407f1a1b118420b1e-212266020');
+SDK::setAccessToken(config('services.mercadoPago.token'));
 
 
 class MercadoPagoService

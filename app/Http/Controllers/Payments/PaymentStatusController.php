@@ -4,7 +4,7 @@
 namespace App\Http\Controllers\Payments;
 
 
-use App\Http\Enums\OrderStatus;
+use App\Http\Enums\PaymentStatus;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -25,10 +25,10 @@ class PaymentStatusController
 
         $status = (json_decode($response)->status);
 
-        if ($status == 'approved'){
-            $order->setOrderStatus(OrderStatus::APPROVED);
-            $order->save();
-        }
+//        if ($status == 'approved'){
+//            $payment->setPaymentStatus(PaymentStatus::APPROVED);
+//            $payment->save();
+//        }
 
         return view('success')
             ->with('order', $order)
@@ -49,10 +49,10 @@ class PaymentStatusController
 
         $status = (json_decode($response)->status);
 
-        if ($status == 'pending'){
-            $order->setOrderStatus(OrderStatus::PENDING);
-            $order->save();
-        }
+//        if ($status == 'pending'){
+//            $order->setOrderStatus(PaymentStatus::PENDING);
+//            $order->save();
+//        }
 
         return view('pending')
             ->with('order', $order)
@@ -73,10 +73,10 @@ class PaymentStatusController
 
         $status = (json_decode($response)->status);
 
-        if ($status == 'approved'){
-            $order->setOrderStatus(OrderStatus::REJECT);
-            $order->save();
-        }
+//        if ($status == 'approved'){
+//            $order->setOrderStatus(PaymentStatus::REJECT);
+//            $order->save();
+//        }
 
         return view('failure')
             ->with('order', $order)

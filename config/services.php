@@ -32,7 +32,7 @@ return [
 
     'mercadoPago' => [
         'key' => env('MP_PUBLIC_KEY'),
-        'TOKEN' => env('MP_ACCESS_TOKEN')
+        'token' => env('MP_ACCESS_TOKEN')
 
     ],
 

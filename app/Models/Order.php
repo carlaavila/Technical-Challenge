@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use MercadoPago\Preference;
 
 class Order extends Model
@@ -46,15 +47,6 @@ class Order extends Model
         $this->amount = $amount;
     }
 
-    public function setOrderStatus(string $status) : void
-    {
-        $this->order_status = $status;
-    }
-
-    public function getOrderStatus(): string
-    {
-        return $this->order_status;
-    }
 
     public function product(): BelongsTo
     {
@@ -99,6 +91,12 @@ class Order extends Model
     public function setUserId(int $userId): void
     {
         $this->user_id = $userId;
+    }
+
+    public function payment(): HasOne
+    {
+        return $this->hasOne(Payment::class);
+
     }
 
 

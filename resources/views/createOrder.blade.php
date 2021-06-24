@@ -61,7 +61,7 @@
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script>
-        const mp = new MercadoPago('TEST-b86adc2b-5e8a-4f57-8fa9-93157296c74b', {
+        const mp = new MercadoPago("{{config('services.mercadoPago.key')}}", {
             locale: 'es-AR'
         })
         const checkout = mp.checkout({

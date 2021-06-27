@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Payments;
 
 
 use App\Http\Enums\PaymentStatus;
+use App\Mail\SendEmail;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentStatusController
 {
+
     public function success(Request $request)
     {
         $order = Order::where([
@@ -19,16 +22,21 @@ class PaymentStatusController
 
         $product = $order->getProduct();
 
+        $payment = $order->getPayment();
+
         $payment_id = $request->get('payment_id');
 
         $response = Http::get("https://api.mercadopago.com/v1/payments/{$payment_id}" . "?access_token=TEST-2018341020639303-060912-516ffa99130e677407f1a1b118420b1e-212266020");
 
+
         $status = (json_decode($response)->status);
 
-//        if ($status == 'approved'){
-//            $payment->setPaymentStatus(PaymentStatus::APPROVED);
-//            $payment->save();
-//        }
+        if ($status == 'approved'){
+            $payment->setPaymentStatus(PaymentStatus::APPROVED);
+            $payment->save();
+        }
+
+        Mail::to('carlita-avila96@hotmail.com')->send(New SendEmail);
 
         return view('success')
             ->with('order', $order)

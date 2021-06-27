@@ -42,6 +42,13 @@
                                         <td class="py-4 px-6  font-bold">Importe total</td>
                                         <td class="py-4 px-6 ">${{ $order ['amount'] }}</td>
                                     </tr>
+                                    <tr class="hover:bg-grey-lighter">
+                                        <td class="p-3 px-5 flex justify-end">
+                                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                                                        type="submit" >
+                                                {{ __('Volver a la tienda') }}
+                                            </x-nav-link>
+                                    </tr>
 
                                     </tbody>
                                 </table>

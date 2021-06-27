@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use MercadoPago\Preference;
 
 class Order extends Model
@@ -93,10 +92,19 @@ class Order extends Model
         $this->user_id = $userId;
     }
 
-    public function payment(): HasOne
+    public function payment(): BelongsTo
     {
-        return $this->hasOne(Payment::class);
+        return $this->belongsTo(Payment::class);
+    }
 
+    public function getPayment() : ?Payment
+    {
+        return $this->payment;
+    }
+
+    public function setPaymentId(int $paymentId): void
+    {
+        $this->payment_id = $paymentId;
     }
 
 

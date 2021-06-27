@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->string('preference_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('payment_id');
             $table->timestamps();
         });
     }

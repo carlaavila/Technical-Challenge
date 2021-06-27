@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Payment extends Model
 {
@@ -25,33 +26,10 @@ class Payment extends Model
         return $this->payment_status;
     }
 
-    public function order(): BelongsTo
+    public function order(): HasOne
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasOne(Order::class);
+
     }
 
-    public function getOrder() : ?Order
-    {
-        return $this->order;
-    }
-
-    public function setOrderId(int $orderId): void
-    {
-        $this->order_id = $orderId;
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function getUser() : ?User
-    {
-        return $this->user;
-    }
-
-    public function setUserId(int $userId): void
-    {
-        $this->user_id = $userId;
-    }
 }

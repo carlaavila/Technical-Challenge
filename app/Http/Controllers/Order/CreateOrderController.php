@@ -68,10 +68,11 @@ class CreateOrderController
 
         $amount = $preference->items[0]->unit_price * $quantity;
 
-        $order = $this->orderService->createOrder($preference->external_reference,$amount,$quantity,$product->getId(),$preference->id,1);
+        $payment = $this->paymentService->createPayment();
 
-        $payment = $this->paymentService->createPayment($order->getId(),1);
-        dd($payment);
+        $order = $this->orderService->createOrder($preference->external_reference,$amount,$quantity,$product->getId(),$preference->id,1, $payment->getId());
+
+
         return redirect()
             ->route('createOrder', ['id' => $order->getId()]);
 

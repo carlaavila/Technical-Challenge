@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MercadoPagoController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Order\CreateOrderController;
 use App\Http\Controllers\Payments\PaymentStatusController;
 use App\Http\Controllers\Product\CreateProductController;
@@ -27,7 +28,9 @@ Route::middleware('auth')->group(
         Route::get('/pending', [PaymentStatusController::class, 'pending'])->name('pending');
 
     }
+
 );
+Route::post('/notification', [NotificationsController::class, '__invoke'])->name('notification');
 
 
 require __DIR__.'/auth.php';

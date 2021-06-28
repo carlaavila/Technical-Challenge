@@ -17,16 +17,14 @@ class PaymentService
         $this->paymentRepository = $paymentRepository;
     }
 
-    public function createPayment(): Payment
+    public function createPayment(string $orderId, int $externalId): Payment
     {
         $payment = new Payment();
-
+        $payment->setOrderId($orderId);
         $payment->setPaymentStatus(PaymentStatus::CREATED);
-
+        $payment->setExternalId($externalId);
         $this->paymentRepository->save($payment);
 
         return($payment);
-
     }
-
 }

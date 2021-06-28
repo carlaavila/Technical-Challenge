@@ -18,7 +18,7 @@ class OrderService
         $this->orderRepository = $orderRepository;
     }
 
-    public function createOrder(string $code,float $amount,int $quantity, int $product_id, string $preference_id, int $user_id, int $payment_id): Order
+    public function createOrder(string $code,float $amount,int $quantity, int $product_id, string $preference_id, int $user_id): Order
     {
         $order = new Order();
 
@@ -28,7 +28,6 @@ class OrderService
         $order->setProductId($product_id);
         $order->setPreferenceId($preference_id);
         $order->setUserId($user_id);
-        $order->setPaymentId($payment_id);
 
         $this->orderRepository->save($order);
 

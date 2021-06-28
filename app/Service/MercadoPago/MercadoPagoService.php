@@ -6,17 +6,18 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 use MercadoPago\Item;
 use MercadoPago\Payer;
-use MercadoPago\Payment;
 use MercadoPago\Preference;
 use MercadoPago\SDK;
 
-require '../../../vendor/autoload.php';
 
-SDK::setAccessToken(config('services.mercadoPago.token'));
 
 
 class MercadoPagoService
 {
+    public function __construct()
+    {
+        SDK::setAccessToken(config('services.mercadoPago.token'));
+    }
 
     public function createPreference(Product $product, $quantity): Preference
     {

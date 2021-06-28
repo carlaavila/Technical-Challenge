@@ -25,10 +25,7 @@ class CreateOrderController
      * @var OrderService
      */
     private $orderService;
-    /**
-     * @var PaymentService
-     */
-    private $paymentService;
+
 
     public function __construct( MercadoPagoService $mercadoPagoService, OrderService $orderService, PaymentService $paymentService)
     {
@@ -55,7 +52,6 @@ class CreateOrderController
 
     public function store(Request $request)
     {
-
         $id = $request->route('id');
 
         $product = Product::where([
@@ -68,9 +64,7 @@ class CreateOrderController
 
         $amount = $preference->items[0]->unit_price * $quantity;
 
-        $payment = $this->paymentService->createPayment();
-
-        $order = $this->orderService->createOrder($preference->external_reference,$amount,$quantity,$product->getId(),$preference->id,1, $payment->getId());
+        $order = $this->orderService->createOrder($preference->external_reference,$amount,$quantity,$product->getId(),$preference->id,1);
 
 
         return redirect()

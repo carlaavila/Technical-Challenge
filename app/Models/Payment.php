@@ -26,10 +26,31 @@ class Payment extends Model
         return $this->payment_status;
     }
 
-    public function order(): HasOne
-    {
-        return $this->hasOne(Order::class);
 
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
     }
+
+    public function getOrder() : ? Order
+    {
+        return $this->order;
+    }
+
+    public function setOrderId(string $orderId): void
+    {
+        $this->order_id = $orderId;
+    }
+
+    public function setExternalId(int $externalId) : void
+    {
+        $this->external_id = $externalId;
+    }
+
+    public function getExternalId(): int
+    {
+        return $this->external_id;
+    }
+
 
 }

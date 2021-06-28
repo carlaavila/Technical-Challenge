@@ -9,15 +9,19 @@ use Illuminate\Support\Facades\Http;
 use MercadoPago\SDK;
 
 
-SDK::setAccessToken(config('services.mercadoPago.token'));
-
 
 class NotificationsController
 {
 
+    public function __construct()
+    {
+        SDK::setAccessToken(config('services.mercadoPago.token'));
+    }
+
     public function __invoke(Request $request)
     {
-        dd($request);
+        logger($request->all());
+        dd(1);
         $payment_id = $request->get('payment_id');
         $response = Http::get("https://api.mercadopago.com/v1/payments/{$payment_id}" . "?access_token=TEST-2018341020639303-060912-516ffa99130e677407f1a1b118420b1e-212266020");
 

@@ -11,14 +11,18 @@ class SendEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $subject = 'Estado de compra';
+    public $order;
+    public $payment;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($order,$payment)
     {
-        //
+        $this->order = $order;
+        $this->payment = $payment;
     }
 
     /**

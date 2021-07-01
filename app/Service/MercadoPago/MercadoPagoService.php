@@ -48,7 +48,7 @@ class MercadoPagoService
         );
         $preference->auto_return = "approved";
         $preference->statement_descriptor = "MINEGOCIO";
-        $preference->notification_url = "https://f0cf9eecca51.ngrok.io/notification";
+        $preference->notification_url = "https://2435114c327c.ngrok.io/notification";
 
         $preference->save();
 

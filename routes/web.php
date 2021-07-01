@@ -30,7 +30,7 @@ Route::middleware('auth')->group(
     }
 
 );
-Route::post('/notification', [NotificationsController::class, '__invoke'])->name('notification');
+        Route::post('/notification', [NotificationsController::class, '__invoke'])->name('notification');
 
 
 require __DIR__.'/auth.php';

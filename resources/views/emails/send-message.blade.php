@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <title></title>
 </head>
 <body>
 <header>
@@ -18,8 +19,7 @@
                     <div class="w-2/3 mx-auto">
                         <div class="bg-white shadow-md rounded my-6">
                             @if($payment['payment_status'] === 'approved')
-                                <div style=" padding: 20px;
-            border-bottom: rgba(128, 128, 128, 0.267) solid 2px;">
+                                <div style=" padding: 20px; border-bottom: rgba(128, 128, 128, 0.267) solid 2px;">
                                     <div class="titleEmail-custom"
                                          style="text-align:center; font-size: 19px;">
                                         <strong>
@@ -30,8 +30,7 @@
                                     </div>
                                 </div>
                             @elseif($payment['payment_status'] === 'reject')
-                                <div style=" padding: 20px;
-        border-bottom: rgba(128, 128, 128, 0.267) solid 2px;">
+                                <div style=" padding: 20px; border-bottom: rgba(128, 128, 128, 0.267) solid 2px;">
                                     <div class="titleEmail-custom"
                                          style="text-align:center; font-size: 19px;">
                                         <strong>

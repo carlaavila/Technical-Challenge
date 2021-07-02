@@ -35,7 +35,7 @@ class PaymentStatusController
         $product = $order->getProduct();
 
         $externalId = $request->get('payment_id');
-        $payment = $this->paymentService->createPayment($order->getCode(),$externalId);
+        $this->paymentService->createPayment($order->getCode(),$externalId);
 
 
 

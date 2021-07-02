@@ -29,6 +29,18 @@
                                         <p class="py-4 px-6 ">{{ $payment['external_id'] }}</p>
                                     </div>
                                 </div>
+                            @elseif($payment['payment_status'] === 'pending')
+                                <div style=" padding: 20px; border-bottom: rgba(128, 128, 128, 0.267) solid 2px;">
+                                    <div class="titleEmail-custom"
+                                         style="text-align:center; font-size: 19px;">
+                                        <strong>
+                                            Para terminar solo resta que pagues ${{ $order['amount']}} <br>
+                                            El cajero te pedirá este dato:
+                                        </strong>
+                                        <p class="py-4 px-6  font-bold">Número de operación</p>
+                                        <p class="py-4 px-6 ">{{ $payment['external_id'] }}</p>
+                                    </div>
+                                </div>
                             @elseif($payment['payment_status'] === 'reject')
                                 <div style=" padding: 20px; border-bottom: rgba(128, 128, 128, 0.267) solid 2px;">
                                     <div class="titleEmail-custom"

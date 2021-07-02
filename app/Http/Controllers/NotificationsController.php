@@ -24,6 +24,8 @@ class NotificationsController
             $payment = Payment::where([
                 ['external_id', '=', $payment_info['id']],
             ])->firstOrFail();
+            $order = $payment->getOrder();
+
 
             switch ($payment_info['status'])
             {
@@ -33,7 +35,7 @@ class NotificationsController
                     $payment->save();
                 }
                 break;
-                case  "in_process" :
+                case  "pending" :
                 {
                     $payment->setPaymentStatus(PaymentStatus::PENDING);
                     $payment->save();
@@ -46,9 +48,9 @@ class NotificationsController
                 }
                 break;
             }
-            //$order = $payment->getOrder();
 
-            //Mail::to('carlita-avila96@hotmail.com')->send(New SendEmail($order, $payment));
+
+            Mail::to('carlita-avila96@hotmail.com')->send(New SendEmail($order, $payment));
 
         }
 

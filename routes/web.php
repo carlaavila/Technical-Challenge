@@ -23,9 +23,7 @@ Route::middleware('auth')->group(
         Route::get('/create-order/{id}', [CreateOrderController::class, 'index'])->name('createOrder');
         Route::post('/create-order/{id}', [CreateOrderController::class, 'store'])->name('createOrder');
 
-        Route::get('/success', [PaymentStatusController::class, 'success'])->name('success');
-        Route::get('/failure', [PaymentStatusController::class, 'failure'])->name('failure');
-        Route::get('/pending', [PaymentStatusController::class, 'pending'])->name('pending');
+        Route::get('/afterCheckout', [PaymentStatusController::class, '__invoke'])->name('afterCheckout');
 
     }
 

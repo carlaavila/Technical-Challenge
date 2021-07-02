@@ -1,15 +1,11 @@
 <?php
 
-
 namespace App\Http\Controllers\Payments;
 
-
-use App\Http\Enums\PaymentStatus;
-use App\Mail\SendEmail;
 use App\Models\Order;use App\Service\Payment\PaymentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Mail;
+
 
 class PaymentStatusController
 {
@@ -23,51 +19,25 @@ class PaymentStatusController
         $this->paymentService = $paymentService;
     }
 
-    public function findOrder(Request $request){
-        return Order::where([
+    public function __invoke(Request $request)
+    {
+        $order = Order::where([
             ['code', '=', $request['external_reference']],
         ])->firstOrFail();
-    }
-
-    public function success(Request $request)
-    {
-        $order = $this->findOrder($request);
         $product = $order->getProduct();
 
         $externalId = $request->get('payment_id');
-        $this->paymentService->createPayment($order->getCode(),$externalId);
+        $payment = $this->paymentService->createPayment($order->getCode(),$externalId);
+        $response = Http::get("https://api.mercadopago.com/v1/payments/{$externalId}" . "?access_token=TEST-2018341020639303-060912-516ffa99130e677407f1a1b118420b1e-212266020");
+        $status = (json_decode($response)->status);
 
 
-
-        return view('success')
+        return view('afterCheckout')
             ->with('order', $order)
+            ->with('payment', $payment)
+            ->with('status', $status)
             ->with('product', $product);
     }
 
-    public function pending(Request $request)
-    {
-        $order = $this->findOrder($request);
-        $product = $order->getProduct();
-
-        $externalId = $request->get('payment_id');
-        $this->paymentService->createPayment($order->getCode(),$externalId);
-
-        return view('pending')
-            ->with('order', $order)
-            ->with('product', $product);
-    }
-
-    public function failure(Request $request)
-    {
-        $order = $this->findOrder($request);
-        $product = $order->getProduct();
-
-        $externalId = $request->get('payment_id');
-        $this->paymentService->createPayment($order->getCode(),$externalId);
-
-        return view('failure')
-            ->with('order', $order)
-            ->with('product', $product);
-    }
 
 }

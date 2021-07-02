@@ -42,9 +42,9 @@ class MercadoPagoService
         $payer->email = "carlita-avila96@hotmail.com";
 
         $preference->back_urls = array(
-            "success" => "http://localhost:8000/success",
-            "failure" => "http://localhost:8000/failure",
-            "pending" => "http://localhost:8000/pending"
+            "success" => "http://localhost:8000/afterCheckout",
+            "failure" => "http://localhost:8000/afterCheckout",
+            "pending" => "http://localhost:8000/afterCheckout"
         );
         $preference->auto_return = "approved";
         $preference->statement_descriptor = "MINEGOCIO";

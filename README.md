@@ -11,7 +11,7 @@ intentar comunicarse con nosotros para poder completar el estado de la transacci
 
 <p align="center"><a  target="_blank"><img src="https://user-images.githubusercontent.com/66972695/124402136-8bcce200-dd04-11eb-8cc4-9be0dfefb0df.png" width="700"></a></p>
 
-##Instrucciones de Instalación
+## Instrucciones de Instalación
 Este documento describe los pasos necesarios para configurar el entorno de desarrollo en la PC local bajo sistemas operativos Linux.
 
 ### Pre instalación del Proyecto.

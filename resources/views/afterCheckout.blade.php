@@ -33,7 +33,7 @@
                                     <p class="py-4 px-6 ">{{ $payment['external_id'] }}</p>
                                 </div>
                             </div>
-                        @elseif($status === 'reject')
+                        @elseif($status === 'rejected')
                             <div style=" padding: 20px; border-bottom: rgba(128, 128, 128, 0.267) solid 2px;">
                                 <div class="titleEmail-custom"
                                      style="text-align:center; font-size: 19px;">

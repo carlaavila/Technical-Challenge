@@ -41,9 +41,9 @@ class NotificationsController
                     $payment->save();
                 }
                 break;
-                case "reject" :
+                case "rejected" :
                 {
-                    $payment->setPaymentStatus(PaymentStatus::REJECT);
+                    $payment->setPaymentStatus(PaymentStatus::REJECTED);
                     $payment->save();
                 }
                 break;

@@ -47,7 +47,7 @@ class MercadoPagoService
             "pending" => "http://localhost:8000/afterCheckout"
         );
         $preference->auto_return = "approved";
-        $preference->statement_descriptor = "MINEGOCIO";
+        $preference->statement_descriptor = "MIAPP";
         $preference->notification_url = "https://2435114c327c.ngrok.io/notification";
 
         $preference->save();

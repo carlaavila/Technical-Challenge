@@ -20,6 +20,7 @@ Route::middleware('auth')->group(
         Route::get('/dashboard', [ListProductController::class, 'index'])->name('dashboard');
         Route::get('/create-product', [CreateProductController::class, 'index'])->name('createProduct');
         Route::post('/create-product', [CreateProductController::class, 'store'])->name('createProduct');
+
         Route::get('/create-order/{id}', [CreateOrderController::class, 'index'])->name('createOrder');
         Route::post('/create-order/{id}', [CreateOrderController::class, 'store'])->name('createOrder');
 

@@ -21,7 +21,7 @@
                         <div>
                             <ul>
                                 <li>
-                                    @if ($errors->any())
+                                    @if($errors->any())
                                         <div class="alert alert-danger" data-dismiss="alert">
                                             <ul>
                                                 @foreach ($errors->all() as $error)

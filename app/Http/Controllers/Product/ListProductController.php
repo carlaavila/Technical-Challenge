@@ -15,7 +15,6 @@ class ListProductController extends Controller
 
     public function index()
     {
-
         $products = Product::all();
 
         return view('/dashboard')->with(

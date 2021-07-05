@@ -21,7 +21,6 @@ class NotificationsController
         {
             $payment_info =  Http::get("https://api.mercadopago.com/v1/payments/".$_GET['id'] . "?access_token=TEST-2018341020639303-060912-516ffa99130e677407f1a1b118420b1e-212266020");
 
-
             $payment = Payment::where([
                 ['external_id', '=', $payment_info['id']],
             ])->firstOrFail();
@@ -42,14 +41,13 @@ class NotificationsController
                     $payment->save();
                 }
                 break;
-                case "rejected" :
+                case "reject" :
                 {
                     $payment->setPaymentStatus(PaymentStatus::REJECT);
                     $payment->save();
                 }
                 break;
             }
-
 
             Mail::to('carlita-avila96@hotmail.com')->send(New SendEmail($order, $payment));
 

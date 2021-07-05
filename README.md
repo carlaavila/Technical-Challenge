@@ -1,62 +1,74 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Technical Challenge 
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+MyApp es una aplicación que realiza la integración con un Sistema Externo, explícitamente un express checkout 
+(“Checkout Pro”) de MercadoPago. Este tipo de checkout implica, una vista sencilla donde podemos ingresar los 
+datos correspondientes a un usuario y un botón de pago que genera una petición de pago a la plataforma correspondiente.
+Además de generar el pago, espera la integración de los webhooks de vuelta, ya que si el usuario paga en diferido 
+quedaría en pendiente hasta realizar el pago o cancelarlo, por lo tanto en esos casos la plataforma de pago va a 
+intentar comunicarse con nosotros para poder completar el estado de la transacción.
 
-## About Laravel
+### Diagrama de flujo:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center"><a  target="_blank"><img src="https://user-images.githubusercontent.com/66972695/124402136-8bcce200-dd04-11eb-8cc4-9be0dfefb0df.png" width="700"></a></p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+##Instrucciones de Instalación
+Este documento describe los pasos necesarios para configurar el entorno de desarrollo en la PC local bajo sistemas operativos Linux.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Pre instalación del Proyecto.
 
-## Learning Laravel
+* Tener instalado Git.
+* Tener instalado Composer.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Clonar Repositorio de GitHub.
+```
+https://github.com/carlaavila/Technical-Challenge.git
+```
+Una vez que ya tenemos clonado nuestro repositorio realizaremos los siguientes pasos.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Instalación de las dependencias.
+1. Ejecutamos `./composer.phar install`
+2. Ejecutamos `npm install` Y finalmente vamos a compilar los archivos .scss y .js mediante el siguiente comando:
+    `npm run dev` .
+3. Esperar la instalación de dependencias de Laravel y compañía.
 
-## Laravel Sponsors
+### Crear archivo de Enviroment
+1. Crear un archivo ```.env```
+2. Copiar lo que existe en el ```.env.example```
+3. Podemos hacerlo automáticamente con el comando ```cp .env.example .env```
+4. Este archivo contiene las credenciales de las cuentas de los servicios utilizados.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Ejecución de las migraciones (Laravel)
+1. Primeramente actualizar el archivo `.env` con los datos correspondientes de la BD:
 
-### Premium Partners
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=challenge
+DB_USERNAME=root
+DB_PASSWORD=C0274
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+```
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=7dd1d4933bb91b
+MAIL_PASSWORD=fa5cb880ea2593
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=carlita-avila96@hotmail.com
+MAIL_FROM_NAME="MIAPP"
+```
 
-## Contributing
+2. Ejecutamos  `php artisan migrate`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Una vez terminada la ejecución ya tendremos las tablas correspondientes en nuestra base de datos.
 
-## Code of Conduct
+4. Ejecutar para tener el `.env` completo y correcto `php artisan key:generate`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. Listo ya podemos entrar al sitio `localhost:8000`
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+

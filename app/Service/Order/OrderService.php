@@ -4,10 +4,8 @@
 namespace App\Service\Order;
 
 
-use App\Http\Enums\PaymentStatus;
 use App\Models\Order;
 use App\Repository\Order\OrderRepository;
-use Illuminate\Support\Str;
 
 class OrderService
 {
@@ -18,7 +16,7 @@ class OrderService
         $this->orderRepository = $orderRepository;
     }
 
-    public function createOrder(string $code,float $amount,int $quantity, int $product_id, string $preference_id, int $user_id): Order
+    public function createOrder(string $code, float $amount, int $quantity, int $product_id, string $preference_id, int $user_id): Order
     {
         $order = new Order();
 
@@ -31,7 +29,7 @@ class OrderService
 
         $this->orderRepository->save($order);
 
-        return($order);
+        return ($order);
 
     }
 

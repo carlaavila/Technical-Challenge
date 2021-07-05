@@ -4,12 +4,11 @@ namespace App\Service\MercadoPago;
 
 use App\Models\Product;
 use Illuminate\Support\Str;
+use MercadoPago\Entity;
 use MercadoPago\Item;
 use MercadoPago\Payer;
 use MercadoPago\Preference;
 use MercadoPago\SDK;
-
-
 
 
 class MercadoPagoService
@@ -21,26 +20,20 @@ class MercadoPagoService
 
     public function createPreference(Product $product, $quantity): Preference
     {
-
-        $preference = new Preference();
-
         $item = new Item();
-
         $item->title = $product->getName();
         $item->description = $product->getDescription();
         $item->quantity = $quantity;
-        $item->unit_price = floatval($product->getPrice()->getAmount()/100);
-
-        $preference->items = array($item);
-
-        $code = Str::random(15);
-
-        $preference->external_reference = $code;
+        $item->unit_price = floatval($product->getPrice()->getAmount() / 100);
 
         $payer = new Payer();
         $payer->name = "Carla";
         $payer->email = "carlita-avila96@hotmail.com";
 
+        $preference = new Preference();
+        $preference->items = array($item);
+        $code = Str::random(15);
+        $preference->external_reference = $code;
         $preference->back_urls = array(
             "success" => "http://localhost:8000/afterCheckout",
             "failure" => "http://localhost:8000/afterCheckout",
@@ -55,7 +48,6 @@ class MercadoPagoService
 
         return $preference;
     }
-
 
 
 }

@@ -10,6 +10,7 @@ use App\Service\MercadoPago\MercadoPagoService;
 use App\Service\Order\OrderService;
 use App\Service\Payment\PaymentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CreateOrderController
 {
@@ -24,18 +25,16 @@ class CreateOrderController
     private $orderService;
 
 
-    public function __construct( MercadoPagoService $mercadoPagoService, OrderService $orderService, PaymentService $paymentService)
+    public function __construct( MercadoPagoService $mercadoPagoService, OrderService $orderService)
     {
         $this->mercadoPagoService = $mercadoPagoService;
         $this->orderService = $orderService;
-        $this->paymentService = $paymentService;
     }
 
     public function index(Request $request)
     {
         try {
             $id = $request->route('id');
-
             $order = Order::where([
                 ['id', '=', $id],
             ])->firstOrFail();
@@ -49,17 +48,25 @@ class CreateOrderController
         }
         catch (\Exception $exception) {
                 return redirect()->route('dashboard')->with('errors', json_decode($exception->getMessage()));
-            }
+        }
     }
 
     public function store(Request $request)
     {
 
             $id = $request->route('id');
-
             $product = Product::where([
                 ['id', '=', $id],
             ])->firstOrFail();
+
+            $validator = Validator::make($request->all(), [
+                'quantity' => 'required|min:0',
+            ]);
+            if ($validator->fails()) {
+                return redirect('dashboard')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
 
             intval($quantity = $request->input('quantity'));
 

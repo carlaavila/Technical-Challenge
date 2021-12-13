@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Repository\Product\ProductRepository;
 use App\Service\Product\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -13,15 +14,17 @@ use Money\Money;
 class CreateProductController extends Controller
 {
     private $productService;
+    private $productRepository;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, ProductRepository $productRepository)
     {
         $this->productService = $productService;
+        $this->productRepository = $productRepository;
     }
 
     public function index()
     {
-        $products = Product::all();
+        $products = $this->productRepository->findAll();
 
         return view('/createProduct')->with(
             'products', $products

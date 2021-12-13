@@ -16,6 +16,14 @@ class PaymentRepository
     /**
      * @param Payment $payment
      */
+
+    public function findByExternalId(int $externalId)
+    {
+        return $this->model->newQuery()
+            ->where('external_id', '=', $externalId)
+            ->firstOrFail();
+
+    }
     public function save(Payment $payment): void
     {
         $payment->save();

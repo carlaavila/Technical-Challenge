@@ -2,28 +2,32 @@
 
 namespace App\Http\Controllers\Payments;
 
-use App\Models\Order;use App\Service\Payment\PaymentService;
+use App\Models\Order;
+use App\Repository\Order\OrderRepository;
+use App\Service\Payment\PaymentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 
 class PaymentStatusController
 {
-    /**
-     * @var PaymentService
-     */
-    private $paymentService;
 
-    public function __construct(PaymentService $paymentService)
+    private $paymentService;
+    private $orderRepository;
+
+    public function __construct(
+        PaymentService $paymentService,
+        OrderRepository $orderRepository
+    )
     {
         $this->paymentService = $paymentService;
+        $this->orderRepository = $orderRepository;
     }
 
     public function __invoke(Request $request)
     {
-        $order = Order::where([
-            ['code', '=', $request['external_reference']],
-        ])->firstOrFail();
+        $externalReference = $request['external_reference'];
+        $order = $this->orderRepository->findByExternalReference($externalReference);
         $product = $order->getProduct();
 
         $externalId = $request->get('payment_id');

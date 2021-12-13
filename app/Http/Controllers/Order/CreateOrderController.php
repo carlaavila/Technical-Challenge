@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Order;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Repository\Order\OrderRepository;
+use App\Repository\Product\ProductRepository;
 use App\Service\MercadoPago\MercadoPagoService;
 use App\Service\Order\OrderService;
 use App\Service\Payment\PaymentService;
@@ -15,29 +17,29 @@ use Illuminate\Support\Facades\Validator;
 class CreateOrderController
 {
 
-    /**
-     * @var MercadoPagoService
-     */
     private $mercadoPagoService;
-    /**
-     * @var OrderService
-     */
     private $orderService;
+    private $orderRepository;
+    private $productRepository;
 
-
-    public function __construct( MercadoPagoService $mercadoPagoService, OrderService $orderService)
-    {
-        $this->mercadoPagoService = $mercadoPagoService;
+    public function __construct(
+        MercadoPagoService $mercadoPagoService,
+        OrderService $orderService,
+        OrderRepository $orderRepository,
+        ProductRepository $productRepository
+    ) {
+        $this->orderRepository = $orderRepository;
         $this->orderService = $orderService;
+        $this->mercadoPagoService = $mercadoPagoService;
+        $this->productRepository = $productRepository;
     }
+
 
     public function index(Request $request)
     {
         try {
             $id = $request->route('id');
-            $order = Order::where([
-                ['id', '=', $id],
-            ])->firstOrFail();
+            $order = $this->orderRepository->findById($id);
 
             $product = $order->getProduct();
 
@@ -55,9 +57,7 @@ class CreateOrderController
     {
 
             $id = $request->route('id');
-            $product = Product::where([
-                ['id', '=', $id],
-            ])->firstOrFail();
+            $product = $this->productRepository->findById($id);
 
             $validator = Validator::make($request->all(), [
                 'quantity' => 'required|min:0',

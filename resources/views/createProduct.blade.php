@@ -46,6 +46,9 @@
                                     <th class="text-left p-3 px-5">Nombre</th>
                                     <th class="text-left p-3 px-5">Descripción</th>
                                     <th class="text-left p-3 px-5">Precio</th>
+                                    <th scope="col" class="relative px-6 py-3">
+                                        <span >Acciones</span>
+                                    </th>
                                 </tr>
                                 @foreach ($products as $product)
                                     <tr class="border-b hover:bg-orange-100 bg-gray-100">
@@ -53,6 +56,17 @@
                                         <td class="p-3 px-5">{{ $product['name'] }}</td>
                                         <td class="p-3 px-5">{{ $product['description'] }}</td>
                                         <td class="p-3 px-5">${{ $product['price']/100 }}</td>
+                                        <td class="px-6 py-4 flex space-x-4 justify-center       text-right text-sm font-medium">
+                                            <a class="text-indigo-600 hover:text-indigo-900" href="{{ route('editProduct', ['id'=>$product->getId()]) }}">Editar</a>
+                                            <form method="post" action="{{ route('deleteProduct', ['id'=>$product->getId()]) }}">
+                                                <input type="hidden" name="_method" value="delete" />
+
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="text-indigo-600 hover:text-indigo-900" onclick="return confirm('¿Estas seguro que deseas eliminar el producto {{$product->getName()}}?')">Eliminar</button>
+                                                <button type="submit" class="text-indigo-600 hover:text-indigo-900" onclick="return confirm('Estas seguro que deseas eliminar el producto {{$product->getName()}}?')"><i class="fa fa-remove"></i></button>
+                                            </form>
+                                        </td>
+
                                         @endforeach
                                     </tr>
 
@@ -169,6 +183,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script>
     all_modals = ['main-modal']

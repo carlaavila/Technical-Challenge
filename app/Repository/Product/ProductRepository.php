@@ -34,6 +34,11 @@ class ProductRepository
         return $result;
     }
 
+    public function softDelete(Product $product): void
+    {
+        $product->delete();
+    }
+
     public function save(Product $product): void
     {
         $product->save();

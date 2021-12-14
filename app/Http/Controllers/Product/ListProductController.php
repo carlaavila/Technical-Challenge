@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Repository\Product\ProductRepository;
 
 class ListProductController extends Controller

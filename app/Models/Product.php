@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Money\Currency;
 use Money\Money;
 
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public function getId()
     {
@@ -52,6 +54,11 @@ class Product extends Model
     {
         return $this->hasOne(Order::class);
 
+    }
+
+    public function getDeletedAt(): ?DateTime
+    {
+        return $this->deleted_at;
     }
 
 }

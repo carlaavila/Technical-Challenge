@@ -21,27 +21,27 @@ class MercadoPagoService
     public function createPreference(Product $product, $quantity): Preference
     {
         $item = new Item();
-        $item->title = $product->getName();
-        $item->description = $product->getDescription();
-        $item->quantity = $quantity;
-        $item->unit_price = floatval($product->getPrice()->getAmount() / 100);
+        $item->setTitle($product->getName());
+        $item->setDescription($product->getDescription());
+        $item->setQuantity($quantity);
+        $item->setUnitPrice(floatval($product->getPrice()->getAmount() / 100));
 
         $payer = new Payer();
-        $payer->name = "Carla";
-        $payer->email = "carlita-avila96@hotmail.com";
+        $payer->setName("Carla");
+        $payer->setEmail("carlita-avila96@hotmail.com");
 
         $preference = new Preference();
-        $preference->items = array($item);
+        $preference->setItems(array($item));
         $code = Str::random(15);
-        $preference->external_reference = $code;
-        $preference->back_urls = array(
+        $preference->setExternalReference($code);
+        $preference->setBackUrls(array(
             "success" => "http://localhost:8000/afterCheckout",
             "failure" => "http://localhost:8000/afterCheckout",
             "pending" => "http://localhost:8000/afterCheckout"
-        );
-        $preference->auto_return = "approved";
-        $preference->statement_descriptor = "MIAPP";
-        $preference->notification_url = "https://2435114c327c.ngrok.io/notification";
+        ));
+        $preference->setAutoReturn("approved");
+        $preference->setStatementDescriptor("MIAPP");
+        $preference->setNotificationUrl("https://2435114c327c.ngrok.io/notification");
 
         $preference->save();
 

@@ -25,6 +25,6 @@ class PaymentService
         $payment->setExternalId($externalId);
         $this->paymentRepository->save($payment);
 
-        return($payment);
+        return $payment;
     }
 }

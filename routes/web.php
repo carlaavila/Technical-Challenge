@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+//Route::get('/', function () {
+//    return view('dashboard');
+//});
+Route::get('/', [ListProductController::class, 'index'])->name('dashboard');
 
 Route::middleware('auth')->group(
     function () {
-        Route::get('/dashboard', [ListProductController::class, 'index'])->name('dashboard');
+       // Route::get('/dashboard', [ListProductController::class, 'index'])->name('dashboard');
         Route::get('/create-product', [CreateProductController::class, 'index'])->name('createProductView');
         Route::post('/create-product', [CreateProductController::class, 'store'])->name('createProduct');
         Route::get('/product/{id}',[UpdateProductController::class, 'viewData'])->name('editProduct');

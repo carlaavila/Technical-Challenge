@@ -13,7 +13,7 @@ class ListProductController extends Controller
     public function __construct(ProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
-        $this->middleware(['auth']);
+      
     }
 
     public function index()

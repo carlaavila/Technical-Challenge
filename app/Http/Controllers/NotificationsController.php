@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Enums\PaymentStatus;
 use App\Mail\SendEmail;
-use App\Models\Payment;
 use App\Repository\Payment\PaymentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;

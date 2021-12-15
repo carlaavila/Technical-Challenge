@@ -11,9 +11,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="text-gray-900 bg-gray-200">
-                        <div class="p-4 flex">
-                            <h1 class="text-3xl">
-                                Productos
+                        <div class="px-4 pt-4 flex justify-center items-center text-center ">
+                            <h1 class="text-3xl ">
+                                Orden de Compra
                             </h1>
                         </div>
                         <div>
@@ -35,18 +35,18 @@
                             <table class="w-full text-md bg-white shadow-md rounded mb-4">
                                 <tbody>
                                 <tr class="border-b">
-                                    <th class="text-left p-3 px-5">Nombre</th>
-                                    <th class="text-left p-3 px-5">Descripción</th>
-                                    <th class="text-left p-3 px-5">Cantidad</th>
-                                    <th class="text-left p-3 px-5">Precio Total</th>
-                                    <th></th>
+                                    <th class="text-center p-3 px-5">Nombre</th>
+                                    <th class="text-center p-3 px-5">Descripción</th>
+                                    <th class="text-center p-3 px-5">Cantidad</th>
+                                    <th class="text-center p-3 px-5">Precio Total</th>
+                                    <th class="text-center p-3 px-5"></th>
                                 </tr>
                                     <tr class="border-b hover:bg-orange-100 bg-gray-100">
-                                        <td class="p-3 px-5">{{ $product['name'] }}</td>
-                                        <td class="p-3 px-5">{{ $product ['description'] }}</td>
-                                        <td class="p-3 px-5">{{ $order ['quantity'] }}</td>
-                                        <td class="p-3 px-5">${{ $order['amount'] }}</td>
-                                        <td class="p-3 px-5 flex justify-end">
+                                        <td class="p-3 px-5 text-center">{{ $product['name'] }}</td>
+                                        <td class="p-3 px-5 text-center">{{ $product ['description'] }}</td>
+                                        <td class="p-3 px-5 text-center">{{ $order ['quantity'] }}</td>
+                                        <td class="p-3 px-5 text-center">${{ $order['amount'] }}</td>
+                                        <td class="p-3 px-5 text-center">
                                             <div class="cho-container"></div>
                                         </td>
                                     </tr>

@@ -16,6 +16,7 @@
             <div class="my-5 mr-5 ml-5 flex justify-center">
                 <form method="POST" action="{{ route('updateProduct', ['id'=>$product->getId()]) }}"   class="w-full">
                     @csrf
+                    @method('PUT')
                     <div class="">
                         <div class="">
                             <label for="name" class="text-md text-gray-600">Nombre</label>

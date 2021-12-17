@@ -41,7 +41,7 @@ class CreateProductController extends Controller
             'price' => 'required|min:0',
         ]);
         if ($validator->fails()) {
-            return redirect('createProduct')
+            return redirect(route('createProductView'))
                 ->withErrors($validator)
                 ->withInput();
         }

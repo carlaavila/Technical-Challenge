@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Order\CreateOrderController;
 use App\Http\Controllers\Payments\PaymentStatusController;

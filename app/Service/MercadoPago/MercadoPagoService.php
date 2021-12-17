@@ -2,11 +2,11 @@
 
 namespace App\Service\MercadoPago;
 
+use App\Models\CustomItem;
+use App\Models\CustomPayer;
+use App\Models\CustomPreference;
 use App\Models\Product;
 use Illuminate\Support\Str;
-use MercadoPago\Entity;
-use MercadoPago\Item;
-use MercadoPago\Payer;
 use MercadoPago\Preference;
 use MercadoPago\SDK;
 
@@ -20,17 +20,17 @@ class MercadoPagoService
 
     public function createPreference(Product $product, $quantity): Preference
     {
-        $item = new Item();
+        $item = new CustomItem();
         $item->setTitle($product->getName());
         $item->setDescription($product->getDescription());
         $item->setQuantity($quantity);
         $item->setUnitPrice(floatval($product->getPrice()->getAmount() / 100));
 
-        $payer = new Payer();
+        $payer = new CustomPayer();
         $payer->setName("Carla");
         $payer->setEmail("carlita-avila96@hotmail.com");
 
-        $preference = new Preference();
+        $preference = new CustomPreference();
         $preference->setItems(array($item));
         $code = Str::random(15);
         $preference->setExternalReference($code);
@@ -43,8 +43,8 @@ class MercadoPagoService
         $preference->setStatementDescriptor("MIAPP");
         $preference->setNotificationUrl("https://2435114c327c.ngrok.io/notification");
 
-        $preference->save();
 
+        $preference->save();
 
         return $preference;
     }

@@ -11,7 +11,7 @@ use App\Http\Controllers\Product\UpdateProductController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [ListProductController::class, 'index'])->name('dashboard');
+        Route::get('/', [ListProductController::class, 'index'])->name('dashboard');
 
 Route::middleware('auth')->group(
     function () {
@@ -21,14 +21,13 @@ Route::middleware('auth')->group(
         Route::put('/product/{id}', [UpdateProductController::class, 'edit'])->name('updateProduct');
         Route::delete('/product/{id}', [DeleteProductController::class, 'delete'])->name('deleteProduct');
 
+    }
+
+);
         Route::get('/create-order/{id}', [CreateOrderController::class, 'index'])->name('createOrderView');
         Route::post('/create-order/{id}', [CreateOrderController::class, 'store'])->name('createOrder');
 
         Route::get('/afterCheckout', [PaymentStatusController::class, '__invoke'])->name('afterCheckout');
-
-    }
-
-);
         Route::post('/notification', [NotificationsController::class, '__invoke'])->name('notification');
 
 
